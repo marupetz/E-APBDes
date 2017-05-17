@@ -1,10 +1,11 @@
 package com.android.e_apbdes;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,8 +14,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.e_apbdes.fragment.AnggaranFragment;
+import com.android.e_apbdes.fragment.ProfilFragment;
+import com.android.e_apbdes.fragment.ProgramFragment;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnTabSelectListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +30,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,7 +39,37 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setOnTabSelectListener(this);
+
     }
+
+    @Override
+    public void onTabSelected(@IdRes int tabId) {
+        if (tabId == R.id.tab_profil) {
+            // The tab with id R.id.tab_favorites was reselected,
+            // change your content accordingly
+
+            ProfilFragment fragment = new ProfilFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment,fragment).commit();
+        }
+        if (tabId == R.id.tab_program) {
+            // The tab with id R.id.tab_favorites was reselected,
+            // change your content accordingly
+
+            ProgramFragment fragment = new ProgramFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment,fragment).commit();
+        }
+        if (tabId == R.id.tab_anggaran) {
+            // The tab with id R.id.tab_favorites was reselected,
+            // change your content accordingly
+
+            AnggaranFragment fragment = new AnggaranFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment,fragment).commit();
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -98,4 +127,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

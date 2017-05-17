@@ -1,0 +1,14 @@
+<tabs>
+    <tab
+        id="@+id/tab_profil"
+        icon="@drawable/ic_person"
+        title="Profil" />
+    <tab
+        id="@+id/tab_program"
+        icon="@drawable/ic_program"
+        title="Program" />
+    <tab
+        id="@+id/tab_anggaran"
+        icon="@drawable/ic_anggaran"
+        title="Anggaran" />
+</tabs>
